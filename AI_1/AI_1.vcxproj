@@ -84,6 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AI_1.cpp" />
+    <ClCompile Include="Delivery.cpp" />
+    <ClCompile Include="NodeEdge.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
