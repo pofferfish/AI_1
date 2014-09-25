@@ -1,3 +1,8 @@
+#ifndef NODE_EDGE
+#define NODE_EDGE
+#include "DeliveryManClient.h"
+#pragma comment (lib, "DeliveryManClient")
+
 //returns the edge between node1 and node2
 Location nodesToEdge(Location node1, Location node2){
 	int y1 = node1.first;
@@ -30,3 +35,5 @@ std::vector<Location> nodeToEdgePath(std::vector<Location> nodes){
 	}
 	return edges;
 }
+
+#endif
