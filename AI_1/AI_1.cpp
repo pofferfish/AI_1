@@ -1,13 +1,93 @@
-//main
-// Delivery.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include <iostream>
 #include <windows.h>
 #include <list>
+#include <queue>
+#include <set>
 #include "DeliveryManClient.h"
 #pragma comment (lib, "DeliveryManClient")
+
+
+class Problem {
+public:
+	Problem(Location start, Location goal) {
+		s = start;
+		g = goal;
+	}
+
+	Location getStart() {
+		return s;
+	}
+
+	Location getGoal() {
+		return g;
+	}
+
+private:
+	Location s;
+	Location g;
+}
+
+
+class Node {
+public:
+	Node() {
+		s = 0;
+		pc = 0;
+	}
+	
+	Node(Location state, int pathCost) {
+		s = state;
+		pc = pathCost;
+	}
+	
+	bool operator() (const Node& n1, const Node& n2) {
+		return n1.pc < n2.pc;
+	}
+	
+	Location getState() {
+		return s;
+	}
+	
+	int getPathCost() {
+		return pc;
+	}
+
+private:
+	Location s;
+	int pc;
+};
+
+
+std::vector<std::pair<int,int>> aStar(Problem problem) {
+	Node startNode(problem.getStart(), 0);
+
+	std::priority_queue<Node, std::vector<Node>, Node> frontier;
+	frontier.push(startNode);
+
+	std::set<Location> explored;
+
+	while(true) {
+		if (frontier.empty()) {
+			return NULL;
+		}
+		
+		Node node = frontier.top();
+		frontier.pop();
+
+		if (node.getState() == problem.getGoal()) {
+			return solution(node); // TBI
+		}
+
+		explored.insert(node.getState);
+		
+		// Find children of node
+		// Iterate over them
+			// If the child is not in explored or frontier, insert the child into the frontier
+			// Else if the child is in frontier with higher path cost, replace that node with the child
+	}
+}
+
 
 std::map<int,std::vector<std::pair<int,int>>> vanInstructions;
 
