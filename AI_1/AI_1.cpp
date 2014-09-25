@@ -3,11 +3,9 @@
 //
 
 #include "stdafx.h"
-
 #include <iostream>
-
 #include <windows.h>
-
+#include <list>
 #include "DeliveryManClient.h"
 #pragma comment (lib, "DeliveryManClient")
 
@@ -58,47 +56,39 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::wstring uselessString;
 
 	client.getInformation(time, edges, vans, waitingDeliveries, activeDeliveries, completedDeliveries, informationOutput);
-		// --- Pseudocode ---
-	// General comment: checks for stranded vans and vans that are
-        // heading for the wrong destination might be done with shorter
-        // or longer time intervals than indicated below.
-	//
-        // spread out cars (evenly?)
-        //
-	// getInformation->completedDeliveries
-	// while(completedDeliveries.length < 20):
-	//     (((Main loop)))
-	//     activeDeliveries = getInformation->activeDeliveries
-        //     for (van in getInformation->Vans):
-        //
-	//         if van.cargo != -1:
-        //
-        //             if (van.instructions.length() == 0):
-        //                 (((This catches vans that are stranded and vans that
-        //                    have just picked up a delivery)))
-	//                 calculate route from van to dropoff point
-        //                 sendInstructions to van
-	//
-	//             delivery = activeDeliveries(van.cargo)
-	//             else if (delivery.dropOff != van.instructions.last()):
-        //                 (((This catches vans that have accidently picked up
-        //                    a delivery)))
-        //                 calculate route from van to dropoff point
-        //                 sendInstructions to van
-	//
-	//     for (delivery in getInformation->waitingDeliveries):
-	//         for (van in getInformation->Vans):
-	//             if (van.cargo == -1):
-        //                 vanList.add(van, distance fr van to pickup point)
-	//                 (((Or use something else than a list)))
-        //         if (vanList.length == 0):
-	//             break for-loop (or continue to next delivery, hoping that
-        //                             some van becomes free?)
-        //         else:
-        //             calculate route from closest van to pickup point
-        //             sendInstructions to closest van
-        //
 
+	// spread out cars
+
+
+	//main loop
+	while(completedDeliveries.size() < 20){
+		std::list<VanInfo> availableVans;
+		for(int i = 0; i < vans.size(); i++){
+			VanInfo currentVan = vans[i];
+			if (currentVan.cargo != -1){									//vans that have a delivery
+				DeliveryInfo  delivery = activeDeliveries[currentVan.cargo];
+				if (currentVan.instructions.size() == 0){					//stranded vans and vans that just picked up a delivery
+					//calculate route from van to dropoff point
+					//sendInstructions to van
+				}
+				else if (delivery.dropOff != currentVan.instructions[currentVan.instructions.size()]){	//vans that have accidently picked up delivery
+					//calculate route from van to dropoff point
+					//sendInstructions to van
+				}
+			}
+			else{
+				availableVans.push_back(currentVan);	//add van to list of available vans
+			}
+		}
+
+		int i = 0;
+		while(!availableVans.empty() &&  i < waitingDeliveries.size()){
+			//find closest van in available list
+			//calculate route from closest van to pickup point
+			//send Instructions to closest van
+			i++;
+		}
+	}
 
 
 	return 0;
