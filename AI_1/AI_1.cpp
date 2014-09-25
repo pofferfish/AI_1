@@ -62,6 +62,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//main loop
 	while(completedDeliveries.size() < 20){
+		edges.clear();
+		vans.clear();
+		waitingDeliveries.clear();
+		activeDeliveries.clear();
+		completedDeliveries.clear();
+		client.getInformation(time, edges, vans, waitingDeliveries, activeDeliveries, completedDeliveries, informationOutput);
+
 		std::list<VanInfo> availableVans;
 		for(int i = 0; i < vans.size(); i++){
 			VanInfo currentVan = vans[i];
