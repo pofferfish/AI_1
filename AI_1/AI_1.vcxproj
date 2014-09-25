@@ -88,6 +88,7 @@
     <ClCompile Include="AI_3.cpp" />
     <ClCompile Include="NodeEdge.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
