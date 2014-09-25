@@ -200,6 +200,12 @@ void pickUpPackage(int vanNumber, Location package, std::vector<VanInfo> vans) {
 	vanInstructions[vanNumber]=path;
 }
 
+void findRoute(Location start, Location end, int vanID){
+	Problem problem = Problem(start, end);
+	std::vector<std::pair<int,int>> aStarPath = aStar(problem);		//calculate route from van to dropoff point  
+	vanInstructions[vanID] = aStarPath;
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	std::wcout << L"Hello and welcome!\n";
@@ -278,15 +284,12 @@ int _tmain(int argc, _TCHAR* argv[])
 			if (currentVan.cargo != -1){									//vans that have a delivery
 				DeliveryInfo  delivery = activeDeliveries[currentVan.cargo];
 				if (currentVan.instructions.size() == 0){					//stranded vans and vans that just picked up a delivery
-					Problem problem = Problem(currentVan.location, delivery.dropOff);
-					std::vector<std::pair<int,int>> aStarPath = aStar(problem);		//calculate route from van to dropoff point  
-					vanInstructions[currentVan.Number] = aStarPath;
+
+					findRoute(currentVan.location, delivery.dropOff, currentVan.Number);
 					client.sendInstructions(vanInstructions,uselessString);			//send instructions to van
 				}
 				else if (delivery.dropOff != currentVan.instructions[currentVan.instructions.size()]){	//vans that have accidently picked up delivery
-					Problem problem = Problem(currentVan.location, delivery.dropOff);
-					std::vector<std::pair<int,int>> aStarPath = aStar(problem);		//calculate route from van to dropoff point
-					vanInstructions[currentVan.Number] = aStarPath;
+					findRoute(currentVan.location, delivery.dropOff, currentVan.Number);
 					client.sendInstructions(vanInstructions,uselessString);			//send instructions to van
 				}
 			}
@@ -299,6 +302,17 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		int j = 0;
 		while(!availableVans.empty() &&  j < waitingDeliveries.size()){
+			///////
+			if(waitingDeliveries.size()+activeDeliveries.size()-deliveriesBeingMade>0) {
+				int whichVan = closestVan(waitingDeliveries[0].pickUp,vans);
+				if(!whichVan==-1) {
+					pickUpPackage(whichVan,waitingDeliveries[0].pickUp,vans);
+					client.sendInstructions(vanInstructions,uselessString);
+					deliveriesBeingMade++;
+				}
+			}
+			//////
+
 			//find closest van in available list
 			//calculate route from closest van to pickup point
 			//send Instructions to closest van
@@ -306,18 +320,6 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 
 		////////////////////
-
-
-
-
-		if(waitingDeliveries.size()+activeDeliveries.size()-deliveriesBeingMade>0) {
-			int whichVan = closestVan(waitingDeliveries[0].pickUp,vans);
-			if(!whichVan==-1) {
-				pickUpPackage(whichVan,waitingDeliveries[0].pickUp,vans);
-				client.sendInstructions(vanInstructions,uselessString);
-				deliveriesBeingMade++;
-			}
-		}
 	}
 
 	return 0;
