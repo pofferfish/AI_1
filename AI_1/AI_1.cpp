@@ -36,6 +36,8 @@ int _tmain(int argc, _TCHAR* argv[]){
 	return 0;
 }
 
+//comment
+
 //returns shortest path of edges from node1 to node 2
 std::vector<Location> edgePath(Location node1, Location node2, std::vector<std::vector<int>> edges){
 	std::vector<Location> path;
