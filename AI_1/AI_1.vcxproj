@@ -86,7 +86,6 @@
     <ClCompile Include="AI_1.cpp" />
     <ClCompile Include="AI_2.cpp" />
     <ClCompile Include="AI_3.cpp" />
-    <ClCompile Include="NodeEdge.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>

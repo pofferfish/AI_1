@@ -1,7 +1,1 @@
-﻿  AI_1.cpp
-c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(237): warning C4018: '<' : signed/unsigned mismatch
-c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(275): warning C4018: '<' : signed/unsigned mismatch
-c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(284): warning C4018: '<' : signed/unsigned mismatch
-c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(306): warning C4018: '<' : signed/unsigned mismatch
-c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(320): warning C4806: '==' : unsafe operation: no value of type 'bool' promoted to type 'int' can equal the given constant
-  AI_1.vcxproj -> C:\Users\malin\documents\visual studio 2010\Projects\AI_1\Debug\AI_1.exe
+﻿  AI_1.vcxproj -> C:\Users\malin\Documents\Visual Studio 2010\Projects\AI_1\Debug\AI_1.exe

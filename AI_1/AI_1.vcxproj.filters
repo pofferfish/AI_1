@@ -32,9 +32,6 @@
     <ClCompile Include="AI_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NodeEdge.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AI_2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
