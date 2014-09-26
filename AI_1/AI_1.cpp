@@ -111,7 +111,7 @@ private:
 
 
 // Help function to aStar, returns the path to node
-std::vector<std::pair<int, int>> solution(Node node, Location start) {
+std::vector<std::pair<int, int>> solution(Node node) {
 	std::vector<std::pair<int, int>> solutionPath;
 	Node *currentNode = &node;
 	while (currentNode != NULL) {
@@ -125,7 +125,7 @@ std::vector<std::pair<int, int>> solution(Node node, Location start) {
 
 // Help function to aStar, inserts a node into the frontier if the
 // conditions of A* are fulfilled
-void insertNodeIntoFrontier(Problem& problem, Node& previousNode, Location& insertLocation, std::set<Node, Node>& frontier, std::set<Location>& explored) {
+/*void insertNodeIntoFrontier(Problem& problem, Node& previousNode, Location& insertLocation, std::set<Node, Node>& frontier, std::set<Location>& explored) {
 	int northPathCost = previousNode.getPathCost() + problem.getEdgeCost(previousNode.getState(), insertLocation) + problem.getEstimatedCostToGoal(insertLocation);
 	Node insertNode(insertLocation, northPathCost, &previousNode);
 
@@ -146,13 +146,47 @@ void insertNodeIntoFrontier(Problem& problem, Node& previousNode, Location& inse
 		}
 	} else {
 		std::set<Node, Node>::iterator findIterator = frontier.find(insertNode);
-		if (findIterator != frontier.end()) {
+		if (findIterator != frontier.end()){
 			Node oldInsertNode = *findIterator;
 			if (oldInsertNode.getPathCost() > insertNode.getPathCost()) {
 				frontier.erase(findIterator);
 				frontier.insert(insertNode);
 			}
 		}
+	}
+}*/
+
+void insertNodeIntoFrontier(Problem& problem, Node& parent, Location& child, std::set<Node, Node>& frontier, std::set<Location>& explored) {
+
+	boolean inFrontier;
+	int newPathCost;
+	int oldPathCost;
+	std::set<int>::iterator it = frontier.begin();
+	Node currentNode;
+
+	for ( it != frontier.end() && ){
+
+
+		it++;
+	}
+
+
+
+
+	/*Node(Location state, int pathCost, Node *parent) {
+		s = state;
+		pc = pathCost;
+		p = parent;
+	};*/
+
+
+	boolean inExplored = explored.count(child);
+	if(!inFrontier && !inExplored){
+		frontier.insert(child);
+	}
+	else if(inFrontier && ){
+		//replace that frontier node with child
+		frontier.insert(it,child); 
 	}
 }
 
@@ -180,12 +214,15 @@ std::vector<std::pair<int, int>> aStar(Problem problem) {
 		} else {
 			// Get the lowest-cost node of the frontier
 			std::set<Node, Node>::iterator lowestIterator = frontier.begin();
-			Node node = *lowestIterator;
+			Node node = *lowestIterator; ////////////
 			frontier.erase(lowestIterator);
+
+
+			
 
 			if (node.getState() == problem.getGoal()) { // The goal is reached
 				//return solution(node);
-				returnValue = solution(node, problem.getStart()); //
+				returnValue = solution(node); //
 				break; //
 			} else {
 				Location location = node.getState();
@@ -203,7 +240,7 @@ std::vector<std::pair<int, int>> aStar(Problem problem) {
 					insertNodeIntoFrontier(problem, node, northLocation, frontier, explored);
 				}
 				
-				if (yCoordinate < problemSize - 1) { // Possible to move to the south
+				if (yCoordinate < problemSize) { // Possible to move to the south
 					Location southLocation(yCoordinate + 1, xCoordinate);
 					insertNodeIntoFrontier(problem, node, southLocation, frontier, explored);
 				}
@@ -213,7 +250,7 @@ std::vector<std::pair<int, int>> aStar(Problem problem) {
 					insertNodeIntoFrontier(problem, node, westLocation, frontier, explored);
 				}
 
-				if (xCoordinate < problemSize - 1) { // Possible to move to the east
+				if (xCoordinate < problemSize) { // Possible to move to the east
 					Location eastLocation(yCoordinate, xCoordinate + 1);
 					insertNodeIntoFrontier(problem, node, eastLocation, frontier, explored);
 				}
@@ -428,23 +465,23 @@ int _tmain(int argc, _TCHAR* argv[])
 			std::wcout << "\n" << "\n";
 			std::wcout << L"Time: " << time << "\n";
 
-			std::wcout << L"Van 0 location: (" << vans[0].location.first << ", " << vans[0].location.second << L"), cargo: " << vans[0].cargo;
+			std::wcout << L"Van 0 location: (" << vans[0].location.first << ", " << vans[0].location.second << L"), cargo: " << vans[0].cargo << L") \n";
 			if (vans[0].instructions.size() > 0) {
 				std::wcout << ", instructions: (" << vans[0].instructions[0].first << ", " << vans[0].instructions[0].second << L") \n";
 			}
-			std::wcout << L"Van 1 location: (" << vans[1].location.first << ", " << vans[1].location.second << L"), cargo: " << vans[1].cargo;
+			std::wcout << L"Van 1 location: (" << vans[1].location.first << ", " << vans[1].location.second << L"), cargo: " << vans[1].cargo << L") \n";
 			if (vans[1].instructions.size() > 0) {
 				std::wcout << ", instructions: (" << vans[1].instructions[0].first << ", " << vans[1].instructions[0].second << L") \n";
 			}
-			std::wcout << L"Van 2 location: (" << vans[2].location.first << ", " << vans[2].location.second << L"), cargo: " << vans[2].cargo;
+			std::wcout << L"Van 2 location: (" << vans[2].location.first << ", " << vans[2].location.second << L"), cargo: " << vans[2].cargo << L") \n";
 			if (vans[2].instructions.size() > 0) {
 				std::wcout << ", instructions: (" << vans[2].instructions[0].first << ", " << vans[2].instructions[0].second << L") \n";
 			}
-			std::wcout << L"Van 3 location: (" << vans[3].location.first << ", " << vans[3].location.second << L"), cargo: " << vans[3].cargo;
+			std::wcout << L"Van 3 location: (" << vans[3].location.first << ", " << vans[3].location.second << L"), cargo: " << vans[3].cargo << L") \n";
 			if (vans[3].instructions.size() > 0) {
 				std::wcout << ", instructions: (" << vans[3].instructions[0].first << ", " << vans[3].instructions[0].second << L") \n";
 			}
-			std::wcout << L"Van 4 location: (" << vans[4].location.first << ", " << vans[4].location.second << L"), cargo: " << vans[4].cargo;
+			std::wcout << L"Van 4 location: (" << vans[4].location.first << ", " << vans[4].location.second << L"), cargo: " << vans[4].cargo << L") \n";
 			if (vans[4].instructions.size() > 0) {
 				std::wcout << ", instructions: (" << vans[4].instructions[0].first << ", " << vans[4].instructions[0].second << L") \n";
 			}
