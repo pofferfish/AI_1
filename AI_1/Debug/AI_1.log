@@ -1,2 +1,6 @@
 ﻿  AI_1.cpp
-  AI_1.vcxproj -> C:\Users\malin\Documents\Visual Studio 2010\Projects\AI_1\Debug\AI_1.exe
+c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(423): warning C4018: '<' : signed/unsigned mismatch
+c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(471): warning C4018: '>=' : signed/unsigned mismatch
+c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(488): warning C4018: '<' : signed/unsigned mismatch
+c:\users\malin\documents\visual studio 2010\projects\ai_1\ai_1\ai_1.cpp(503): warning C4018: '<' : signed/unsigned mismatch
+  AI_1.vcxproj -> C:\Users\malin\documents\visual studio 2010\Projects\AI_1\Debug\AI_1.exe

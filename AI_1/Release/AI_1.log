@@ -1,0 +1,12 @@
+﻿  AI_1.cpp
+AI_1.cpp(423): warning C4018: '<' : signed/unsigned mismatch
+AI_1.cpp(471): warning C4018: '>=' : signed/unsigned mismatch
+AI_1.cpp(488): warning C4018: '<' : signed/unsigned mismatch
+AI_1.cpp(503): warning C4018: '<' : signed/unsigned mismatch
+  AI_2.cpp
+  AI_3.cpp
+  stdafx.cpp
+  test.cpp
+  Generating code
+  Finished generating code
+  AI_1.vcxproj -> C:\Users\malin\documents\visual studio 2010\Projects\AI_1\Release\AI_1.exe
